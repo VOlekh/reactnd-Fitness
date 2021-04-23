@@ -54,10 +54,6 @@ export default class AddEntry extends Component {
       return (
           //display either slider or stepper
         <View>
-            <View>
-            <Text>{getMetricMetaInfo("run").displayName}</Text>
-            <View>{getMetricMetaInfo("run").getIcon()}</View>
-             </View>
              {Object.keys(metaInfo).map((key) => {
                  // get everything from metaInfo[key] and map over
                 const { getIcon, type, ...rest } = metaInfo[key]

@@ -44,8 +44,21 @@ export default class App extends React.Component {
   return (
     <View>
       <Text>Universal React with Expo</Text>
-      {getMetricMetaInfo("bike").getIcon()}
+   
+      <View>{getMetricMetaInfo("run").getIcon()}</View>
+      <Text>{getMetricMetaInfo("run").displayName}</Text>
      
+      <View>{getMetricMetaInfo("bike").getIcon()}</View>
+      <Text>{getMetricMetaInfo("bike").displayName}</Text>
+
+      <View>{getMetricMetaInfo("swim").getIcon()}</View>
+      <Text>{getMetricMetaInfo("swim").displayName}</Text>
+     
+      <View>{getMetricMetaInfo("sleep").getIcon()}</View>
+      <Text>{getMetricMetaInfo("sleep").displayName}</Text>
+
+      <View>{getMetricMetaInfo("eat").getIcon()}</View>
+      <Text>{getMetricMetaInfo("eat").displayName}</Text>
     </View>
   );
 }
