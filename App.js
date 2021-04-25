@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Text } from "react-native"
-import { View } from "react-native"
+import { View, Text} from "react-native"
+
 import AddEntry from "./components/AddEntry"
 import { getMetricMetaInfo } from "./utils/helpers"
 
