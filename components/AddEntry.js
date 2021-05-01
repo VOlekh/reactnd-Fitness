@@ -14,9 +14,10 @@ import { purple, white } from "../utils/colors";
 function SubmitBtn ({ onPress }) {
     return (
       <TouchableOpacity
-            style={Platform.OS === "ios" ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+            // style={Platform.OS === "ios" ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+            style={styles.iosSubmitBtn}
              onPress={onPress}>
-            <Text>SUBMIT</Text>
+            <Text  style={styles.submitBtnText}>SUBMIT</Text>
       </TouchableOpacity>
     )
   }
@@ -114,7 +115,7 @@ class AddEntry extends Component {
                         name={Platform.OS === "ios" ? "ios-happy-outline" : "md-happy"} 
                         size={100} />
                     <Text>You already logged your information for today.</Text>
-                    <TextButton onPress={this.reset}>Reset</TextButton>
+                    <TextButton style={{padding:10}} onPress={this.reset}>Reset</TextButton>
                 </View>
             )
             }  
@@ -122,7 +123,7 @@ class AddEntry extends Component {
             
             return (
                 //display either slider or stepper
-                <View>
+                <View style={styles.container}>
                     <DateHeader date={(new Date()).toLocaleDateString()}/>
                     <Text>{JSON.stringify(this.state)}</Text>
                     {Object.keys(metaInfo).map((key) => {
