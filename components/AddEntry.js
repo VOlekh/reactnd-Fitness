@@ -26,7 +26,7 @@ function SubmitBtn ({ onPress }) {
 class AddEntry extends Component {
     state = {
         //metrics
-        run:10,
+        run:0,
         bike: 0,
         swime: 0,
         //
@@ -38,7 +38,7 @@ class AddEntry extends Component {
         //max what should metric to be and a step to increment - step
         const{max, step}= getMetricMetaInfo(metric)
         this.setState((state)=>{
-            const count = statate[metric] + step
+            const count = state[metric] + step
         //object you return from setState is gona be merjed with the current state
             return{
                 //keep all we have
