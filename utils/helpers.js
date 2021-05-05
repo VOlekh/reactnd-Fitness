@@ -6,9 +6,10 @@ import { red, orange, blue, lightPurp, pink, white } from './colors'
 
 
 export function getDailyReminderValue () {
-  return {
+  //Also the items provided to the Agenda class should be Arrays. As we have objects we need to wrap them in array.
+  return [{
     today: "👋 Don't forget to log your data today!"
-  }
+  }]
 }
 // contaner around the icon
 const styles = StyleSheet.create({
