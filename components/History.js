@@ -8,8 +8,12 @@ import { Agenda } from 'react-native-calendars'
 import { white } from '../utils/colors'
 import DateHeader from './DateHeader'
 import MetricCard from "./MetricCard"
+import AppLoading from 'expo-app-loading'
 
 class History extends Component {
+    state = {
+        ready: false,
+      }
   componentDidMount () {
         const { dispatch } = this.props
 
@@ -68,6 +72,11 @@ class History extends Component {
     // under render we will have enteries we got when we called fetch
     render() {
         const { entries } = this.props
+        const { ready } = this.state
+
+        if (ready === false) {
+          return <AppLoading />
+        }
         return (
             // <View>
             // <Text>{JSON.stringify(this.props)}</Text>
