@@ -14,7 +14,13 @@ import PagerView from 'react-native-pager-view';
 import { purple, white } from './utils/colors'
 
 
-
+function UdaciStatusBar ({backgroundColor, ...props}){
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 const Tab =
   Platform.OS === 'ios'
     ? createBottomTabNavigator()

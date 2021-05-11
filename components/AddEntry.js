@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, TouchableOpacity, Text, Platform, StyleSheet } from "react-native";
-import { getMetricMetaInfo, timeToString, getDailyReminderValue } from "../utils/helpers";
+import {   getMetricMetaInfo,    timeToString,    getDailyReminderValue,    clearLocalNotification,    setLocalNotification } from "../utils/helpers";
 import Slider from "./Slider";
 import Steppers from "./Steppers";
 import DateHeader from "./DateHeader";
@@ -10,6 +10,9 @@ import { submitEntry, removeEntry } from '../utils/api'
 import {connect} from "react-redux";
 import { addEntry } from "../actions";
 import { purple, white } from "../utils/colors";
+import { CommonActions } from '@react-navigation/native';
+
+
 
 function SubmitBtn ({ onPress }) {
     return (
@@ -69,7 +72,7 @@ class AddEntry extends Component {
 
     submit = () => {
         const key = timeToString()
-        const entry = [this.state]
+        const entry = this.state
     
         // Update Redux
         this.props.dispatch(
@@ -82,12 +85,15 @@ class AddEntry extends Component {
         this.setState(() => ({ run: 0, bike: 0, swim: 0, sleep: 0, eat: 0 }))
     
         // Navigate to home
+        this.toHome()
         
     
         // Save to "DB"
         submitEntry({ key, entry })
     
         // Clear local notification
+        clearLocalNotification()
+        .then(setLocalNotification)
       }
 
     reset = () => {
@@ -101,10 +107,18 @@ class AddEntry extends Component {
           );
     
         // Route to Home
+        this.toHome()
     
         // Update "DB"
         removeEntry(key)
     };
+
+    toHome = () => {
+        this.props.navigation.dispatch({
+          ...CommonActions.goBack(),
+          source: 'AddEntry'
+        })
+      }
 
     render(){
         const metaInfo = getMetricMetaInfo()
@@ -205,7 +219,8 @@ const styles = StyleSheet.create({
   
     return {
         // if state[key] not "0" and state[key].today undefined
-      alreadyLogged: state[key] && typeof state[key].today === "undefined"
+    //   alreadyLogged: state[key] && typeof state[key].today === "undefined"
+        alreadyLogged: state[key].length && typeof state[key][0].today === 'undefined'
     };
   }
   
