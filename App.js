@@ -1,5 +1,5 @@
 import * as React from "react"
-import { View, Text, StyleSheet} from "react-native"
+import { View, Text, Platform, StyleSheet} from "react-native"
 import AddEntry from './components/AddEntry'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
@@ -12,7 +12,10 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { enableScreens } from 'react-native-screens';
 import PagerView from 'react-native-pager-view';
 import { purple, white } from './utils/colors'
-
+import Constants from 'expo-constants';
+import Title from './components/Title';
+import Live from './components/Live'
+import { setLocalNotification } from './utils/helpers'
 
 function UdaciStatusBar ({backgroundColor, ...props}){
   return (
@@ -57,7 +60,7 @@ export default class App extends React.Component {
           >
             <Tab.Screen
               name='Add Entry'
-              component={ConnectedAddEntry}
+              component={AddEntry}
               options={{
                 tabBarIcon: ({ color }) => (
                   <FontAwesome name='plus-square' size={30} color={color} />
@@ -66,7 +69,7 @@ export default class App extends React.Component {
             />
             <Tab.Screen
               name='History'
-              component={ConnectedHistory}
+              component={History}
               options={{
                 tabBarIcon: ({ color }) => (
                   <Ionicons name='ios-bookmarks' size={30} color={color} />
