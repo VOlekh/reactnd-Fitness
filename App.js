@@ -13,9 +13,9 @@ import { enableScreens } from 'react-native-screens';
 import PagerView from 'react-native-pager-view';
 import { purple, white } from './utils/colors'
 import Constants from 'expo-constants';
-import Title from './components/Title';
-import Live from './components/Live'
-import { setLocalNotification } from './utils/helpers'
+// import Title from './components/Title';
+// import Live from './components/Live'
+// import { setLocalNotification } from './utils/helpers'
 
 function UdaciStatusBar ({backgroundColor, ...props}){
   return (
