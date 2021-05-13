@@ -9,15 +9,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const NOTIFICATION_KEY = 'UdaciFitness:notifications';
 
 
+export function isBetween(num, x, y) {
+  if (num >= x && num <= y) {
+    return true;
+  }
 
-
-export function getDailyReminderValue () {
-  //Also the items provided to the Agenda class should be Arrays. As we have objects we need to wrap them in array.
-  return [{
-    today: "👋 Don't forget to log your data today!"
-  }]
+  return false;
 }
-// contaner around the icon
+
+
 const styles = StyleSheet.create({
   iconContainer: {
     padding: 5,
@@ -26,9 +26,38 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 20
-  },
+    marginRight: 20,
+  }
 })
+
+export function calculateDirection(heading) {
+  let direction = "";
+
+  if (isBetween(heading, 0, 22.5)) {
+    direction = "North";
+  } else if (isBetween(heading, 22.5, 67.5)) {
+    direction = "North East";
+  } else if (isBetween(heading, 67.5, 112.5)) {
+    direction = "East";
+  } else if (isBetween(heading, 112.5, 157.5)) {
+    direction = "South East";
+  } else if (isBetween(heading, 157.5, 202.5)) {
+    direction = "South";
+  } else if (isBetween(heading, 202.5, 247.5)) {
+    direction = "South West";
+  } else if (isBetween(heading, 247.5, 292.5)) {
+    direction = "West";
+  } else if (isBetween(heading, 292.5, 337.5)) {
+    direction = "North West";
+  } else if (isBetween(heading, 337.5, 360)) {
+    direction = "North";
+  } else {
+    direction = "Calculating";
+  }
+
+  return direction;
+}
+
 
 export function getMetricMetaInfo(metric) {
   const info = {
@@ -107,46 +136,44 @@ export function getMetricMetaInfo(metric) {
   return typeof metric === "undefined" ? info : info[metric];
 }
 
-export function isBetween(num, x, y) {
-  if (num >= x && num <= y) {
-    return true;
-  }
 
-  return false;
+
+
+
+export function timeToString(time = Date.now()) {
+  const date = new Date(time);
+  const todayUTC = new Date(
+    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+  );
+  return todayUTC.toISOString().split("T")[0];
 }
 
-export function calculateDirection(heading) {
-  let direction = "";
+// export function getDailyReminderValue () {
+//   //Also the items provided to the Agenda class should be Arrays. As we have objects we need to wrap them in array.
+//   return [{
+//     today: "👋 Don't forget to log your data today!"
+//   }]
+// }
+// // contaner around the icon
+// const styles = StyleSheet.create({
+//   iconContainer: {
+//     padding: 5,
+//     borderRadius: 8,
+//     width: 50,
+//     height: 50,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//     marginRight: 20
+//   },
+// })
 
-  if (isBetween(heading, 0, 22.5)) {
-    direction = "North";
-  } else if (isBetween(heading, 22.5, 67.5)) {
-    direction = "North East";
-  } else if (isBetween(heading, 67.5, 112.5)) {
-    direction = "East";
-  } else if (isBetween(heading, 112.5, 157.5)) {
-    direction = "South East";
-  } else if (isBetween(heading, 157.5, 202.5)) {
-    direction = "South";
-  } else if (isBetween(heading, 202.5, 247.5)) {
-    direction = "South West";
-  } else if (isBetween(heading, 247.5, 292.5)) {
-    direction = "West";
-  } else if (isBetween(heading, 292.5, 337.5)) {
-    direction = "North West";
-  } else if (isBetween(heading, 337.5, 360)) {
-    direction = "North";
-  } else {
-    direction = "Calculating";
-  }
-
-  return direction;
+export function getDailyReminderValue() {
+  return [{
+    today: " 👋 Don't forget to log your data today!"
+  }]
 }
 
-export function clearLocalNotification() {
-  return AsyncStorage.removeItem(NOTIFICATION_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync)
-}
+
 
 export function createNotification() {
   return {
@@ -164,13 +191,9 @@ export function createNotification() {
   }
 }
 
-
-export function timeToString(time = Date.now()) {
-  const date = new Date(time);
-  const todayUTC = new Date(
-    Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
-  );
-  return todayUTC.toISOString().split("T")[0];
+export function clearLocalNotification() {
+  return AsyncStorage.removeItem(NOTIFICATION_KEY)
+    .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
 export function setLocalNotification() {
