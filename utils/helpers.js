@@ -201,7 +201,7 @@ export function setLocalNotification() {
     .then(JSON.parse)
     .then((data) => {
       if(data === null) {
-        //Permissions.askAsync(Permissions.NOTIFICATIONS)
+        Permissions.askAsync(Permissions.NOTIFICATIONS)
           Notifications.getPermissionsAsync()
           .then(({ status }) => {
             if(status === 'granted') {

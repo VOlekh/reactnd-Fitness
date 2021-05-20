@@ -20,6 +20,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import EntryDetail from './components/EntryDetails';
 
 const Stack = createStackNavigator();
+// const Tabs=TabNavigator({
+//   History:{},
+//   AddEntry:{}
+//   })
 function Tabs() {
   return (
     <Tab.Navigator
@@ -65,70 +69,6 @@ function Tabs() {
   )
 }
 
-{/* <Tab.Navigator
-    initialRouteName="History"
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ color }) => {
-        if (route.name === "History") {
-          return (
-            <Ionicons name="ios-bookmarks" size={30} color={color} />
-          );
-        } else if (route.name === "AddEntry") {
-          return (
-            <FontAwesome name="plus-square" size={30} color={color} />
-          );
-        } else if (route.name === "Live") {
-          return (
-            <Ionicons
-              name="ios-speedometer"
-              size={30}
-              color={color}
-            />
-          );
-        }
-      },
-    })}
-    tabBarOptions={{
-      activeTintColor: Platform.OS === "ios" ? purple : white,
-      style: {
-        height: 56,
-        backgroundColor: Platform.OS === "ios" ? white : purple,
-        shadowColor: "rgba(0, 0, 0, 0.24)",
-        shadowOffset: {
-          width: 0,
-          height: 3,
-        },
-        shadowRadius: 6,
-        shadowOpacity: 1,
-      },
-    }}
-    >
-    <Tab.Screen
-      name="Add Entry"
-      component={AddEntry}
-      options={{
-        tabBarIcon: ({ color }) => (
-          <FontAwesome name="plus-square" size={30} color={color} />
-        ),
-      }}
-    />
-
-    <Tab.Screen
-      name="History"
-      component={History}
-      options={{
-        tabBarIcon: ({ color }) => (
-          <Ionicons name="ios-bookmarks" size={30} color={color} />
-        ),
-      }}
-    />
-
-    <Tab.Screen
-      name="Live"
-      component={Live}
-      options={{ headerShown: false }}
-    />
-</Tab.Navigator> */}
 
 function UdaciStatusBar({ backgroundColor, ...props }) {
   return (
@@ -137,6 +77,8 @@ function UdaciStatusBar({ backgroundColor, ...props }) {
     </View>
   );
 }
+
+
 const Tab =
   Platform.OS === "ios"
     ? createBottomTabNavigator()
